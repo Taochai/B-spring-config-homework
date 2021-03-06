@@ -3,13 +3,15 @@ package com.thoughtworks.capability.gtb.demospringconfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-@WebMvcTest(LevelController.class)
+@WebMvcTest(value = LevelController.class)
+@ActiveProfiles(profiles = "test1")
 class LevelControllerTest {
     @Autowired
     private MockMvc mockMvc;
@@ -19,7 +21,7 @@ class LevelControllerTest {
         MvcResult result = this.mockMvc
                 .perform(get("/level"))
                 .andReturn();
-        assertEquals(result.getResponse().getContentAsString(), "basic");
+        assertEquals(result.getResponse().getContentAsString(), "advanced");
 
     }
 }
